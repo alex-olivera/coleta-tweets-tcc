@@ -37,57 +37,68 @@
 		<li class="active">Iniciar Nova Busca</li>
 	</ol>
 
-	<form:form id="novaBuscaForm" role="form" commandName="coleta"
+	<form:form id="novaBuscaForm" role="form" commandName="search"
 		servletRelativeAction="buscar" method="POST"
 		cssClass="form-horizontal">
+		
 		<div class="form-group" style="width: 100%">
 			<label for="descricao" class="col-sm-2 control-label">
 				Descrição da busca:</label>
 			<div class="col-sm-3">
-				<input type="text" class="form-control" name="descricao"
-					id="descricao" placeholder="Descrição da busca" />
+				<form:input id="description" path="description"
+					cssClass="form-control" placeholder="Descrição da busca" />
+				<div class="error-validation" id="erro-description">
+					<form:errors path="description">
+					</form:errors>
+				</div>
 			</div>
 		</div>
 		<div class="form-group" style="width: 100%">
 			<label for="busca" class="col-sm-2 control-label"> Buscar
 				por:</label>
 			<div class="col-sm-3">
-				<input type="text" name="busca" class="form-control" id="busca"
-					placeholder="Buscar por" />
+				<form:input path="valueSearch" cssClass="form-control"
+					id="valueSearch" placeholder="Buscar por" />
+				<div class="error-validation" id="erro-valueSearch">
+					<form:errors path="valueSearch">
+					</form:errors>
+				</div>
 			</div>
 		</div>
-
 		<div class="form-group" style="width: 100%">
 			<label for="tempo_periodo" class="col-sm-2 control-label">
-				Periodo de tempo para buscas: </label>
+				Periodo de tempo para buscas (por minuto): </label>
 			<div class="col-sm-2">
-				<select name="tempo_periodo" id="tempo_periodo" class="form-control">
-					<option value="minuto">Minuto</option>
-					<option value="dia">Dia</option>
-					<option value="hora">Hora</option>
-				</select>
-			</div>
-			<div class="col-sm-1">
-				<input type="text" class="form-control" name="tempo_hora"
-					id="tempo_hora" placeholder="Tempo" />
+				<form:input cssClass="form-control" path="timeSearch"
+					id="timeSearch" placeholder="Tempo em minutos" />
+				<div class="error-validation" id="erro-timeSearch">
+					<form:errors path="timeSearch">
+					</form:errors>
+				</div>
 			</div>
 		</div>
-
 		<div class="form-group" style="width: 100%">
 			<label for="quantidade" class="col-sm-2 control-label"> Qtd.
 				de tweets por busca: </label>
 			<div class="col-sm-2">
-				<input type="text" name="quantidade" id="quantidade"
-					class="form-control" placeholder="Qtd. tweets" />
+				<form:input path="quantity" id="quantity"
+					cssClass="form-control" placeholder="Qtd. tweets" />
+				<div class="error-validation" id="erro-quantity">
+					<form:errors path="quantity">
+					</form:errors>
+				</div>
 			</div>
 		</div>
-
 		<div class="form-group" style="width: 100%">
 			<label for="num_buscas" class="col-sm-2 control-label">
 				Requisições da busca: </label>
 			<div class="col-sm-2">
-				<input type="text" class="form-control" name="num_buscas"
-					id="num_buscas" placeholder="Requisições" />
+				<form:input cssClass="form-control" path="numberSearch"
+					id="numberSearch" placeholder="Requisições" />
+				<div class="error-validation" id="erro-numberSearch">
+					<form:errors path="numberSearch">
+					</form:errors>
+				</div>
 			</div>
 		</div>
 
@@ -96,7 +107,7 @@
 				<input type="submit" value="Procurar" class="btn btn-primary" />
 			</div>
 		</div>
-		
+
 	</form:form>
 
 

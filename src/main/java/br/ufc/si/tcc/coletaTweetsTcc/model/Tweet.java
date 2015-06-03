@@ -22,41 +22,47 @@ public class Tweet implements Serializable{
 	
 	@Id
 	private long id;
-	private String texto;
+	
+	private String text;
+	
 	@ElementCollection
-	@CollectionTable (name = "mencionados_tweets", joinColumns = @JoinColumn(name = "tweet_id"))
-	@Column (name="mencionado")
-	private Collection<String> mencionados;
+	@CollectionTable (name = "mentioned_tweets", joinColumns = @JoinColumn(name = "tweet_id"))
+	@Column (name="mentionad")
+	private Collection<String> mentioned;
+	
 	@ElementCollection
 	@CollectionTable (name="hash_tags_tweets", joinColumns = @JoinColumn(name = "tweet_id"))
 	@Column (name="hash_tag")
 	private Collection<String> hashTags;
-	private Date data;
+	
+	private Date date;
 	private double latitude;
 	private double longitude;
+	
 	@OneToOne
-	@JoinColumn(name="usuario_id")
-	private Usuario usuario;
+	@JoinColumn(name="user_id")
+	private UserTwitter user;
+	
 	@ManyToOne
-	@JoinColumn(name="busca_id")
-	private Busca busca;
+	@JoinColumn(name="search_id")
+	private Search search;
 	
 	public Tweet(){
 		
 	}
 	
-	public Tweet(long id, String texto, Collection<String> mencionados,
-			Collection<String> hashTags, Date data, double latitude,
-			double longitude, Usuario usuario) {
+	public Tweet(long id, String text, Collection<String> mentioned,
+			Collection<String> hashTags, Date date, double latitude,
+			double longitude, UserTwitter user) {
 		super();
 		this.id = id;
-		this.texto = texto;
-		this.mencionados = mencionados;
+		this.text = text;
+		this.mentioned = mentioned;
 		this.hashTags = hashTags;
-		this.data = data;
+		this.date = date;
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.usuario = usuario;
+		this.user = user;
 	}
 
 	public long getId() {
@@ -67,20 +73,20 @@ public class Tweet implements Serializable{
 		this.id = id;
 	}
 	
-	public String getTexto() {
-		return texto;
+	public String getText() {
+		return text;
 	}
 	
-	public void setTexto(String texto) {
-		this.texto = texto;
+	public void setText(String text) {
+		this.text = text;
 	}
 	
-	public Collection<String> getMencionados() {
-		return mencionados;
+	public Collection<String> getMentioned() {
+		return mentioned;
 	}
 
-	public void setMencionados(Collection<String> mencionados) {
-		this.mencionados = mencionados;
+	public void setMentioned(Collection<String> mentioned) {
+		this.mentioned = mentioned;
 	}
 
 	public Collection<String> getHashTags() {
@@ -93,12 +99,12 @@ public class Tweet implements Serializable{
 	}
 
 
-	public Date getData() {
-		return data;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public double getLatitude() {
@@ -117,28 +123,28 @@ public class Tweet implements Serializable{
 		this.longitude = longitude;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public UserTwitter getUser() {
+		return user;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUser(UserTwitter user) {
+		this.user = user;
 	}
 	
-	public Busca getBusca() {
-		return busca;
+	public Search getSearch() {
+		return search;
 	}
 
-	public void setBusca(Busca busca) {
-		this.busca = busca;
+	public void setSearch(Search search) {
+		this.search = search;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((busca == null) ? 0 : busca.hashCode());
-		result = prime * result + ((data == null) ? 0 : data.hashCode());
+		result = prime * result + ((search == null) ? 0 : search.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result
 				+ ((hashTags == null) ? 0 : hashTags.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
@@ -148,9 +154,9 @@ public class Tweet implements Serializable{
 		temp = Double.doubleToLongBits(longitude);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result
-				+ ((mencionados == null) ? 0 : mencionados.hashCode());
-		result = prime * result + ((texto == null) ? 0 : texto.hashCode());
-		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
+				+ ((mentioned == null) ? 0 : mentioned.hashCode());
+		result = prime * result + ((text == null) ? 0 : text.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -163,15 +169,15 @@ public class Tweet implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Tweet other = (Tweet) obj;
-		if (busca == null) {
-			if (other.busca != null)
+		if (search == null) {
+			if (other.search != null)
 				return false;
-		} else if (!busca.equals(other.busca))
+		} else if (!search.equals(other.search))
 			return false;
-		if (data == null) {
-			if (other.data != null)
+		if (date == null) {
+			if (other.date != null)
 				return false;
-		} else if (!data.equals(other.data))
+		} else if (!date.equals(other.date))
 			return false;
 		if (hashTags == null) {
 			if (other.hashTags != null)
@@ -186,20 +192,20 @@ public class Tweet implements Serializable{
 		if (Double.doubleToLongBits(longitude) != Double
 				.doubleToLongBits(other.longitude))
 			return false;
-		if (mencionados == null) {
-			if (other.mencionados != null)
+		if (mentioned == null) {
+			if (other.mentioned != null)
 				return false;
-		} else if (!mencionados.equals(other.mencionados))
+		} else if (!mentioned.equals(other.mentioned))
 			return false;
-		if (texto == null) {
-			if (other.texto != null)
+		if (text == null) {
+			if (other.text != null)
 				return false;
-		} else if (!texto.equals(other.texto))
+		} else if (!text.equals(other.text))
 			return false;
-		if (usuario == null) {
-			if (other.usuario != null)
+		if (user == null) {
+			if (other.user != null)
 				return false;
-		} else if (!usuario.equals(other.usuario))
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}

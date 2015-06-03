@@ -8,27 +8,30 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="usuarios")
-public class Usuario implements Serializable{
+@Table(name="users")
+public class UserTwitter implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	private long id;
-	private String nome;
+	
+	private String name;
+	
 	@Column(name="user_name")
 	private String userName;
-	private String localizacao;
 	
-	public Usuario(){
+	private String location;
+	
+	public UserTwitter(){
 		
 	}
 	
-	public Usuario(long id, String nome, String userName, String localizacao) {
+	public UserTwitter(long id, String name, String userName, String location) {
 		this.id = id;
-		this.nome = nome;
+		this.name = name;
 		this.userName = userName;
-		this.localizacao = localizacao;
+		this.location = location;
 	}
 
 	public long getId() {
@@ -39,12 +42,12 @@ public class Usuario implements Serializable{
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getUserName() {
@@ -55,12 +58,12 @@ public class Usuario implements Serializable{
 		this.userName = userName;
 	}
 
-	public String getLocalizacao() {
-		return localizacao;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setLocalizacao(String localizacao) {
-		this.localizacao = localizacao;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	@Override
@@ -68,7 +71,7 @@ public class Usuario implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result
 				+ ((userName == null) ? 0 : userName.hashCode());
 		return result;
@@ -82,13 +85,13 @@ public class Usuario implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Usuario other = (Usuario) obj;
+		UserTwitter other = (UserTwitter) obj;
 		if (id != other.id)
 			return false;
-		if (nome == null) {
-			if (other.nome != null)
+		if (name == null) {
+			if (other.name != null)
 				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!name.equals(other.name))
 			return false;
 		if (userName == null) {
 			if (other.userName != null)
